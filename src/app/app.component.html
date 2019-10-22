@@ -1,0 +1,62 @@
+<div class="card">
+  <h5 class="card-header">Contact Registration</h5>
+  <div class="card-body">
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Visit date</label>
+          <input type="date" class="form-control" formControlName="visitDate" />
+        </div>
+        <div class="form-group col">
+          <label>Service</label>
+          <select class="form-control" formControlName="service">
+            <option *ngFor="let service of services | async" [value]="service">
+              {{service}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Responsible Unit</label>
+          <select class="form-control" formControlName="responsibleUnit">
+            <option *ngFor="let responsibleUnit of responsibleUnits | async" [value]="responsibleUnit">
+              {{responsibleUnit}}</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Performing Unit</label>
+          <select class="form-control" formControlName="performingUnit">
+              <option *ngFor="let perfomringUnit of filterdPerfomringUnits | async" [value]="perfomringUnit.name">
+                  {{perfomringUnit.name}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col">
+          <label>Customer</label>
+          <select class="form-control" formControlName="customer">
+            <option *ngFor="let customer of customers | async" [value]="customer.id">
+              {{customer.id}}</option>
+          </select>
+        </div>
+        <div class="form-group col">
+          <label>Agreement</label>
+          <select class="form-control" formControlName="agreement">
+              <option *ngFor="let agreement of filteredAgreements | async" [value]="agreement">
+                  {{agreement.id}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="text-right">
+        <button type="reset" class="btn btn-secondary mr-1">Reset</button>
+        <button type="submit" class="btn btn-primary">Register Contact</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<hr />
+{{patientForm.value | json}}
